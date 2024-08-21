@@ -78,8 +78,8 @@ dealing with macros this padding space is optional.
 
 ### File Boilerplate
 
-Within the first page (24 lines) of a file, the project's name and project 
-URL, the file's purpose, and the project's basic licensing information must 
+Within the first page (24 lines) of a file, the project's name, URL, the
+file's purpose, and the project's basic licensing information must 
 be visible. each file should fit the following format
 
 ``` C
@@ -104,10 +104,6 @@ been reached, such as a simple
 /* end of file */
 ```
 
-[back to index](#index)
-
----
-
 #### Header Files
 
 Directly following the universal file boilerplate, header files, `*.h`, must 
@@ -129,6 +125,10 @@ note: do not use `#pragma once`
 With few exceptions, every C source file should have an accompanying header 
 file (by the same name). This header file should be included before any other 
 inclusions or code takes place.
+
+[back to index](#index)
+
+---
 
 ### Include Statements
 
@@ -196,8 +196,8 @@ static inline int add_int (int a, int b);
 static inline long add_long (long a, long b);
 
 #define BETTER_MACRO_ADD(a, b) _Generic ((a), \
- int:  add_int, \
- long: add_long \
+    int:  add_int, \
+    long: add_long \
 )((a), (b))
 ```
 
@@ -246,17 +246,17 @@ line, following the `;`, or even following curly braces, `{` and `}`.
  * line
  * comment */
 
- /* explain what MAGIC_NUMBER_A does */
- const int MAGIC_NUMBER_A;
+/* explain what MAGIC_NUMBER_A does */
+const int MAGIC_NUMBER_A;
 
- const int MAGIC_NUMBER_B; /* explain what MAGIC_NUMBER_B does */
+const int MAGIC_NUMBER_B;     /* explain what MAGIC_NUMBER_B does */
 
- if (true)
- { /* this block of code will always occur and does [...] stuffs 
- * using MAGIC_NUMBER_A and MAGIC_NUMBER_B */
- /* [code] */
+if (true)
+{   /* this block of code will always occur and does [...] stuffs 
+     * using MAGIC_NUMBER_A and MAGIC_NUMBER_B */
+    /* [code] */
 
- } /* end if [human readable conditinal] */
+}   /* end if [human readable conditinal] */
 ```
 
 comments should be relatively short; general code comments are to be all 
@@ -324,13 +324,13 @@ node_int_t *nodei_get_next (node_int_t *self);
 node_int_t *
 nodei_get_next (node_int_t *self)
 {
-    if (NULL == self)
- {
- errno = EINVAL;
+    if (NULL == self)
+    {
+        errno = EINVAL;
         return NULL;
- }
+    }
 
-    return self->next;
+    return self->next;
 }
 ```
 
@@ -366,8 +366,8 @@ static int buf_index;
 void
 example_init (void)
 {
- g_buf = (char *)malloc (G_BUF_LEN);
- g_buf_index = 0;
+    g_buf = (char *)malloc (G_BUF_LEN);
+    g_buf_index = 0;
     return;
 }
 
@@ -375,7 +375,7 @@ void
 example_quit (void)
 {
     free (g_buf); g_buf = NULL;
- g_buf_index = 0;
+    g_buf_index = 0;
     return;
 }
 
@@ -385,15 +385,15 @@ example_function (void)
     int a = 1;
     int b = 2;
 
-    for (int i = 0; i < g_buf_index; i++)
- {
-        char c = g_buf[i];
+    for (int i = 0; i < g_buf_index; i++)
+    {
+        char c = g_buf[i];
         char d = g_buf[i + 1];
         printf ("%c %c\n", c, d);
 
         const char CD = c + d;
         printf ("%d\n", (int)(unsigned char)CD);
- }
+    }
 
     const int AB = a + b;
     printf ("%d", AB);
@@ -424,14 +424,14 @@ function_example (void)
     char character;
 
     if (NULL == g_pointer_a)
- {
- errno = EINVAL;
+    {
+        errno = EINVAL;
         return;
- }
+    }
 
- character = g_pointer_a[0];
+    character = g_pointer_a[0];
 
- /* [more code] */
+    /* [more code] */
 }
 ```
 
@@ -483,7 +483,7 @@ assignments.
 ``` C
 if (NULL == variable_a)
 {
- /* ... */
+    /* ... */
 }
 ```
 
@@ -501,11 +501,11 @@ given conditional block must be followed by a newline for padding.
 
 ``` C
 typedef enum {
- STATE_ERROR,
- STATE_ACTIVE,
- STATE_DISABLED,
- STATE_BUSY,
- STATE_HALT,
+    STATE_ERROR,
+    STATE_ACTIVE,
+    STATE_DISABLED,
+    STATE_BUSY,
+    STATE_HALT,
 } state_t;
 
 switch ((state_t)value)
@@ -546,12 +546,12 @@ while (/* side effect */) {}
 
 while (true)
 {
- /* ... */
+    /* ... */
 }
 
 do
 {
- /* ... */
+    /* ... */
 }
 while (true);
 ```
@@ -569,12 +569,12 @@ beginning of the scope, depending on the intended behavior
 for (int i = 0; i < 10; i++)
 {
     for (int j = 0; j < 10; j++)
- {
+    {
         for (int k = 0; k < 10; k++)
- {
- /* ... */
- }
- }
+        {
+            /* ... */
+        }
+    }
 }
 ```
 
@@ -604,12 +604,12 @@ this is not shown in the example)
 ``` C 
 typedef struct
 {
-    void *self; /* 8/4 byte */
-    size_t elem_size; /* 8/4 byte */
-    size_t alloc_count; /* 8/4 byte */
-    size_t count; /* 8/4 byte */
-    uint32_t uid; /* 4 byte */
-    unsigned char m[]; /* variable length array */
+    void *self;           /* 8/4 byte */
+    size_t elem_size;     /* 8/4 byte */
+    size_t alloc_count;   /* 8/4 byte */
+    size_t count;         /* 8/4 byte */
+    uint32_t uid;         /* 4 byte */
+    unsigned char m[];    /* variable length array */
 } dynamic_array_t;
 ```
 
@@ -624,15 +624,15 @@ if an enum needs to be named (outside of a typedef) it must use snakecase. all
 ``` C 
 typedef enum
 {
- STATE_ERROR,
- STATE_RUNNING,
- STATE_HALTED,
- STATE_CLOSING,
+    STATE_ERROR,
+    STATE_RUNNING,
+    STATE_HALTED,
+    STATE_CLOSING,
 } my_state_t;
 
 typedef enum named_enum
 {
- /* ... */
+    /* ... */
 } named_enum_t
 ```
 
@@ -642,5 +642,5 @@ typedef enum named_enum
 
 ## License
 
-[SoftFauna C Style Guide](https://github.com/SoftFauna/softfauna-style-guide.git) by [The SoftFauna Team](https://github.com/SoftFauna) is marked with [CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/?ref=chooser-v1)  
+[SoftFauna C Style Guide](https://github.com/SoftFauna/softfauna-style-guide.git) by [The SoftFauna Team](https://github.com/SoftFauna) is marked with [CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/?ref=chooser-v1)  
 <https://creativecommons.org/publicdomain/zero/1.0/?ref=chooser-v1>
