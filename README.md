@@ -11,7 +11,7 @@
 
 Style Guides by language
 
-- None yet
+- [C Style Guide](/C)
 
 ## License
 
