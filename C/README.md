@@ -602,15 +602,22 @@ structures may use _headers_ to implement pseudo-private/public fields. (note
 this is not shown in the example)
 
 ``` C 
+typedef struct dynamic_array
+{
+    struct dynamic_array *self;    /* 8/4 byte */
+    size_t elem_size;              /* 8/4 byte */
+    size_t alloc_count;            /* 8/4 byte */
+    size_t count;                  /* 8/4 byte */
+    uint32_t uid;                  /* 4 byte */
+    unsigned char m[];             /* variable length array */
+} dynamic_array_t;
+
 typedef struct
 {
-    void *self;           /* 8/4 byte */
-    size_t elem_size;     /* 8/4 byte */
-    size_t alloc_count;   /* 8/4 byte */
-    size_t count;         /* 8/4 byte */
-    uint32_t uid;         /* 4 byte */
-    unsigned char m[];    /* variable length array */
-} dynamic_array_t;
+    float x;
+    float y;
+    float z;
+} vec3;
 ```
 
 #### enums
