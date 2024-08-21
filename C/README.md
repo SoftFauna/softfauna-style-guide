@@ -617,7 +617,7 @@ typedef struct
     float x;
     float y;
     float z;
-} vec3;
+} vec3_t;
 ```
 
 #### enums
